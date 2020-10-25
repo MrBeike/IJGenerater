@@ -1,27 +1,22 @@
 from configparser import ConfigParser
 from zipfile import ZipFile
 import pandas as pd
+import os
 
 class IJGenerater:
-    def __init__(self,fileUrl,keyword):
+    def __init__(self,fileUrl):
         '''
         初始化变量
         :params fileUrl: Excel文件地址
-        :params keyword: 表单关键词代码
         '''
         self.fileUrl = fileUrl
-        self.keyword = keyword
         # FIXME pyinstaller打包os模块提示木马(360报毒)
-        # path, filename = os.path.split(fileUrl)
-        filename = fileUrl.split('\\')[-1]
-        filename_name = filename.split('.')[0]
-        # filename_part = filename_name.split('#')
-        # self.creditCode, self.date, _, self.reportCode = filename_part
-        # self.common_name = f"{self.creditCode}{self.date.replace('-','')}{self.reportCode}"
+        filepath, filename_full = os.path.split(fileUrl)    
+        filename, extension = os.path.splitext(filename_full)
         # 解析文件名获取相关信息
-        self.creditCode = filename_name[0:18]
-        self.date = filename_name[18:26]
-        self.reportCode = filename_name[26:31]
+        self.creditCode = filename[0:18]
+        self.date = filename[18:26]
+        self.reportCode = filename[26:31]
         self.common_name = f"{self.creditCode}{self.date}{self.reportCode}"
 
     def configWriter(self):
@@ -37,7 +32,8 @@ class IJGenerater:
         读取报表配置(Conifg.ini)
         '''
         reader = ConfigParser()
-        reader.read('config.ini',encoding='utf-8')
+        reader.read('resource//config.ini',encoding='utf-8')
+        self.keyword = reader['common']['keyword']
         section = reader[self.reportCode]
         self.dataProperty = section['dataProperty']
         self.currency = section['currency']

@@ -1,0 +1,10 @@
+<RCC>
+  <qresource prefix="img">
+    <file>donate_lite.png</file>
+    <file>zip.ico</file>
+    <file>donate.png</file>
+  </qresource>
+  <qresource prefix="config">
+    <file>config.ini</file>
+  </qresource>
+</RCC>
