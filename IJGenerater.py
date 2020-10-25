@@ -1,7 +1,7 @@
 from configparser import ConfigParser
 from zipfile import ZipFile
 import pandas as pd
-import os
+import os, sys
 
 class IJGenerater:
     def __init__(self,fileUrl):
@@ -19,6 +19,18 @@ class IJGenerater:
         self.reportCode = filename[26:31]
         self.common_name = f"{self.creditCode}{self.date}{self.reportCode}"
 
+    def appPath(self, relativepath):
+        '''
+        项目基础位置定位。(解决打包后找不到相对路径下的文件)
+        '''
+        if hasattr(sys, 'frozen'):
+            basePath = os.path.dirname(sys.executable)
+            # Handles PyInstaller
+        else:
+            basePath = os.path.dirname(__file__)
+        print(os.path.join(basePath, relativepath))
+        return os.path.join(basePath, relativepath)
+
     def configWriter(self):
         '''
         修改报表配置(Conifg.ini)
@@ -32,7 +44,7 @@ class IJGenerater:
         读取报表配置(Conifg.ini)
         '''
         reader = ConfigParser()
-        reader.read('resource//config.ini',encoding='utf-8')
+        reader.read(self.appPath('resource//config.ini'),encoding='utf-8')
         self.keyword = reader['common']['keyword']
         section = reader[self.reportCode]
         self.dataProperty = section['dataProperty']

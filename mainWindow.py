@@ -24,7 +24,7 @@ class IJwindow:
             self.ui.generater_button.setDisabled(False)
     
     # TODO 获取相对文件夹路径appPath       
-    # TODO 设置保存目的文件夹 filepath
+    # TODO 设置保存目的文件夹 filepath 保存所有文件？
     @Slot()
     def generate_file(self):
         self.generater.start()
