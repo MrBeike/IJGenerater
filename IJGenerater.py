@@ -53,17 +53,17 @@ class IJGenerater:
         self.flag = section['flag']
         self.dataType = section['dataType']
 
-    def idxGenerater(self):
+    def idxGenerater(self,path=''):
         '''
         根据报表信息组装I文件(idx后缀)
         '''
         # 组合I文件名称
         destFile = f'BI{self.common_name}.idx'
         content = f'{self.keyword}|{self.reportCode}|{self.dataProperty}|{self.currency}|{self.unit}|{self.flag}|{self.dataType}|{self.creditCode}'
-        with open(destFile,'w',newline='',encoding='utf-8') as f:
+        with open(os.path.join(path,destFile),'w',newline='',encoding='utf-8') as f:
             f.write(content)
 
-    def Excel2Dat(self):
+    def Excel2Dat(self,path=''):
         '''
         将Excel文件转换成J文件(实质是csv文件,后缀使用dat)
         '''
@@ -79,22 +79,25 @@ class IJGenerater:
         df.insert(0,column='keyword',value=keyword_list)
         content = df.to_csv(None,header=False,index=False,sep='|',encoding='utf-8',float_format='%.2f')
         # to_csv会自动多空一行，手动去除后两行写入文件
-        with open(destFile,'w',newline='',encoding='utf-8') as f:
+        with open(os.path.join(path,destFile),'w',newline='',encoding='utf-8') as f:
             f.write(content[:-2])    
 
-    def zipFiles(self):
+    def zipFiles(self,path=''):
         '''
         将I文件和J文件打包压缩
         '''
-        with ZipFile(f'BI{self.common_name}.zip','w') as f:
-            f.write(f'BI{self.common_name}.idx')
-            f.write(f'BJ{self.common_name}.dat')
+        destFile = f'BI{self.common_name}.zip'
+        idx_file = f'BI{self.common_name}.idx'
+        dat_file = f'BJ{self.common_name}.dat'
+        with ZipFile(os.path.join(path,destFile),'w') as f:
+            f.write(os.path.join(path,idx_file))
+            f.write(os.path.join(path,dat_file))
 
-    def start(self):
+    def start(self,path=''):
         self.configReader()
-        self.idxGenerater()
-        self.Excel2Dat()
-        self.zipFiles()
+        self.idxGenerater(path)
+        self.Excel2Dat(path)
+        self.zipFiles(path)
 
 
 if __name__ == '__main__':

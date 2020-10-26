@@ -27,7 +27,8 @@ class IJwindow:
     # TODO 设置保存目的文件夹 filepath 保存所有文件？
     @Slot()
     def generate_file(self):
-        self.generater.start()
+        path = QFileDialog.getExistingDirectory(self.ui, "IJ文件保存","", options=QFileDialog.ShowDirsOnly)
+        self.generater.start(path)
         self.ui.generater_button.setDisabled(True)
 
 if __name__ == "__main__":
