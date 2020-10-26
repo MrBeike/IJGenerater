@@ -1,8 +1,8 @@
 import sys
 import resource.resource_rc 
 from PySide2.QtUiTools import QUiLoader
-from PySide2.QtWidgets import QApplication,QMessageBox,QFileDialog,QAbstractItemView,QTableWidgetItem,QHeaderView, QWidget
-from PySide2.QtCore import Qt,Slot,QTextStream,QFile
+from PySide2.QtWidgets import QApplication,QMessageBox,QFileDialog
+from PySide2.QtCore import Slot
 from IJGenerater import IJGenerater
 
 class IJwindow:
@@ -10,7 +10,7 @@ class IJwindow:
         self.ui = QUiLoader().load('resource//main.ui')
         self.donate_ui = QUiLoader().load('resource//donate.ui')
         self.about_ui = QUiLoader().load('resource//about.ui')
-        self.ui.config_action.triggered.connect()
+        # self.ui.config_action.triggered.connect()
         self.ui.donate_action.triggered.connect(self.donate_ui.show)
         self.ui.about_action.triggered.connect(self.about_ui.show)
         self.ui.open_button.clicked.connect(self.open_file)
@@ -36,6 +36,8 @@ class IJwindow:
         path = QFileDialog.getExistingDirectory(self.ui, "IJ文件保存","", options=QFileDialog.ShowDirsOnly)
         self.generater.start(path)
         self.ui.generater_button.setDisabled(True)
+        # QMessageBox.information(self.ui,icon=':/img/zip.ico', title ='提示', text='完工啦！')
+        QMessageBox.information(self.ui,'提示', '完工啦！')
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

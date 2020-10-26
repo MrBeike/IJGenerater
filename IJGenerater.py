@@ -44,7 +44,7 @@ class IJGenerater:
         读取报表配置(Conifg.ini)
         '''
         reader = ConfigParser()
-        reader.read(self.appPath('resource//config.ini'),encoding='utf-8')
+        reader.read(self.appPath('resource\config.ini'),encoding='utf-8')
         self.keyword = reader['common']['keyword']
         section = reader[self.reportCode]
         self.dataProperty = section['dataProperty']
@@ -90,8 +90,8 @@ class IJGenerater:
         idx_file = f'BI{self.common_name}.idx'
         dat_file = f'BJ{self.common_name}.dat'
         with ZipFile(os.path.join(path,destFile),'w') as f:
-            f.write(os.path.join(path,idx_file))
-            f.write(os.path.join(path,dat_file))
+            f.write(os.path.join(path,idx_file),idx_file)
+            f.write(os.path.join(path,dat_file),dat_file)
 
     def start(self,path=''):
         self.configReader()
