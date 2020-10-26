@@ -1,4 +1,5 @@
 import sys
+import resource.resource_rc 
 from PySide2.QtUiTools import QUiLoader
 from PySide2.QtWidgets import QApplication,QMessageBox,QFileDialog,QAbstractItemView,QTableWidgetItem,QHeaderView, QWidget
 from PySide2.QtCore import Qt,Slot,QTextStream,QFile
@@ -7,6 +8,11 @@ from IJGenerater import IJGenerater
 class IJwindow:
     def __init__(self):
         self.ui = QUiLoader().load('resource//main.ui')
+        self.donate_ui = QUiLoader().load('resource//donate.ui')
+        self.about_ui = QUiLoader().load('resource//about.ui')
+        self.ui.config_action.triggered.connect()
+        self.ui.donate_action.triggered.connect(self.donate_ui.show)
+        self.ui.about_action.triggered.connect(self.about_ui.show)
         self.ui.open_button.clicked.connect(self.open_file)
         self.ui.generater_button.clicked.connect(self.generate_file)
         self.ui.generater_button.setDisabled(True)
@@ -27,6 +33,7 @@ class IJwindow:
     # TODO 设置保存目的文件夹 filepath 保存所有文件？
     @Slot()
     def generate_file(self):
+        dir = QFileDialog.getExistingDirectory(self, "Open Directory","/home",QFileDialog.ShowDirsOnly)
         self.generater.start()
         self.ui.generater_button.setDisabled(True)
 
