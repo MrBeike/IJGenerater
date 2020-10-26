@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>about</class>
+ <widget class="QWidget" name="about">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>493</width>
+    <height>258</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>493</width>
+    <height>258</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>493</width>
+    <height>258</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>关于</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="resource.qrc">
+    <normaloff>:/img/zip.ico</normaloff>:/img/zip.ico</iconset>
+  </property>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>10</y>
+     <width>101</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Agency FB</family>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>IJGenerater🧱</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>50</y>
+     <width>441</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>## 是什么
+用于统计系统上EXCEL报表转IJ文件的小工具。（仅适用于金融基础数据库报文：20201 20202 20203）</string>
+   </property>
+   <property name="wordWrap">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>100</y>
+     <width>461</width>
+     <height>111</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>## 怎么用
+ + 确保20201表中的【本期情况】一列单位格格式为“文本型”，数值类指标后小数后两位需要手动输入（比如4.00，不可用数值-保留两位小数的形式）
+ + 确保文件名按照 `机构信用代码(18位)年(4位)月(2位)日(2位)报表编号(5位).xls` 的格式命名。如`91100000100003962T2020033120201.xls`
+ + 按需求修改`config.ini`文件。（一般不需要调整）
+ + 双击`IJGenerater.exe`
+ + Hola!</string>
+   </property>
+   <property name="wordWrap">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>230</y>
+     <width>291</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;项目地址：&lt;a href=&quot;https://github.com/MrBeike/IJGenerater&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;https://github.com/MrBeike/IJGenerater&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="textFormat">
+    <enum>Qt::RichText</enum>
+   </property>
+  </widget>
+ </widget>
+ <resources>
+  <include location="resource.qrc"/>
+ </resources>
+ <connections/>
+</ui>
