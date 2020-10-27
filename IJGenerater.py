@@ -19,16 +19,22 @@ class IJGenerater:
         self.reportCode = filename[26:31]
         self.common_name = f"{self.creditCode}{self.date}{self.reportCode}"
 
-    def appPath(self, relativepath):
-        '''
-        项目基础位置定位。(解决打包后找不到相对路径下的文件)
-        '''
-        if hasattr(sys, 'frozen'):
-            basePath = os.path.dirname(sys.executable)
-            # Handles PyInstaller
-        else:
-            basePath = os.path.dirname(__file__)
-        print(os.path.join(basePath, relativepath))
+    # for Pyinstaller
+    # def appPath(self, relativepath):
+    #     '''
+    #     项目基础位置定位。(解决打包后找不到相对路径下的文件)
+    #     '''
+    #     if hasattr(sys, 'frozen'):
+    #         basePath = os.path.dirname(sys.executable)
+    #         # Handles PyInstaller
+    #     else:
+    #         basePath = os.path.dirname(__file__)
+    #     print(os.path.join(basePath, relativepath))
+    #     return os.path.join(basePath, relativepath)
+
+    # for Nuitka
+    def appPath(self,relativepath):
+        basePath= os.getcwd()
         return os.path.join(basePath, relativepath)
 
     def configWriter(self):
