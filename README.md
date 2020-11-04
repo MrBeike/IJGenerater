@@ -22,4 +22,5 @@
   
 ## 其他
 如果你觉得这个工具很赞,可以赞赏作者给予鼓励。（下次一定也OK:joy:）
-<img src="donate.png">
+
+<img src="resource/donate.png">
