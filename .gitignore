@@ -7,3 +7,13 @@ dist/
 *.spec
 distribution/
 out/
+
+*.ipynb
+*.pyc
+*.xls
+*.xlsx
+*.doc
+*.docx
+*.dat
+*.log
+*.zip
