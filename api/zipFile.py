@@ -1,6 +1,7 @@
 import os
 import zipfile
 
+
 # def workDirClean():
 #     fileList = os.listdir(workDir)
 #     for eachfile in fileList:
@@ -28,7 +29,7 @@ import zipfile
 #             pass
 #     return excelFiles
 
-def zipFile(filename, path=''):
+def zipFile(filename: str, path: str = ''):
     zipFilename = f'{os.path.join(path, filename)}.zip'
     zipFile = zipfile.ZipFile(zipFilename, 'w', zipfile.ZIP_DEFLATED)
     f_txt = filename + '.dat'

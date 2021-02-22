@@ -20,6 +20,8 @@ class FUDT:
             self.pureFilename = pureFilename
             self.reportCode = reportCode
             self.date = date
+        else:
+            print('文件路径错误或不支持。')
         return
 
     def configHandler(self):

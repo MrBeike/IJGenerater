@@ -4,19 +4,26 @@ from .hooksConfig import configReader
 from .hooks import decimal0, decimal2, decimal5, idMask, dateParser
 
 
-def datWriter(filename, reportConfig, path=''):
+def datWriter(filename: str, reportConfig: dict, path: str = ''):
+    '''
+    将excel文件按规则转换成dat文件
+    :param filename: excel文件名
+    :param reportConfig: 报表规则
+    :param path: 路径(Console默认根目录,Gui可配置)
+    :return:
+    '''
     df = pd.read_excel(filename, header=0, sheet_name=0)
     columnNames = list(df)
     for key, value in reportConfig.items():
-        columnName = columnNames[key-1]
+        columnName = columnNames[key - 1]
         # FIXME idMask函数补丁 如何区分各类证件？
         # BUG 证件类型和证件号不一定是前后关系？
         if value.__name__ == 'idMask':
-            assistColumnName = columnNames[key-2]
+            assistColumnName = columnNames[key - 2]
             assistDF = df[assistColumnName]
             dataDF = df[columnName]
-            idRule = zip(assistDF,dataDF)
-            idMasked = [value(x,y) for x,y in idRule]
+            idRule = zip(assistDF, dataDF)
+            idMasked = [value(x, y) for x, y in idRule]
             df[columnName] = idMasked
         else:
             df[columnName] = df[columnName].map(lambda x: value(x))
@@ -36,4 +43,4 @@ if __name__ == '__main__':
     rules = configReader('rule')
     rule = rules['CLGRDK']
     filename = '91341700573031656T_CLGRDK_20201130.xlsx'
-    datWriter(filename,rule)
+    datWriter(filename, rule)
